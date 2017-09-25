@@ -1,0 +1,5 @@
+name: plugmod
+main: plugmod.PlugMod
+version: 0.01
+load: STARTUP
+author: 7kasper
