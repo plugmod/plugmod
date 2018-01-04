@@ -1,21 +1,34 @@
 package plugmod.dataplace;
 
+import plugmod.dataplace.impl.DBConfig;
+
 public class DataPlace {
 
-	private DataStore store;
-	private final DataPlace INSTANCE = new DataPlace();
-	private DataPlace() { }
+	private static long apiVersion = 1;
+	public static long getApiVersion() { return apiVersion; }
 	
-	public DataPlace getInstance() {
+	private static final DataPlace INSTANCE = new DataPlace();
+	private DataPlace() { }
+	public static DataPlace getInstance() {
 		return INSTANCE;
 	}
 	
-	public void init() {
-		
+	private DataStore store;
+	private DBConfig dbConfig;
+	
+	public void init(DBConfig dbConfig) {
+		this.dbConfig = dbConfig;
 	}
 	
 	public DataStore getStore() {
 		return store;
+	}
+	
+	/**
+	 * @return the database config.
+	 */
+	public DBConfig getDBConfig() {
+		return dbConfig;
 	}
 	
 }

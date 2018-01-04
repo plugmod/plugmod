@@ -1,0 +1,8 @@
+bukkit
+plugmod
+config
+configs
+yaml
+plugmods
+datafolder
+plugin

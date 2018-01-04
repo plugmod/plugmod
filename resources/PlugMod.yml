@@ -1,0 +1,27 @@
+# == PlugMod ==
+# Here storage and misc settings can be inputted to further configure PlugMod. 
+# 
+# = DataStore =
+# Many plugins use PlugMod for their data storage. This data can get quite extensive.
+# Per default, PlugMod saves to sqlite flatfile inside the plugin's map,
+# we strongly recommand to instead use either MySQL or Cassandra 
+# for better performance and less stress on your server.
+# - type - The database type to use, can be either "sqlite", "mysql" or "cassandra".
+# 
+# > Remote
+# Settings for either MySQL or Cassandra that tell where the data is.
+# - host - The ip or hostname of the remote database (use 127.0.0.1 for local db)
+# - port - The port of the database (MySQL default = 3306, Cassandra default = 9042)
+# - database - The name of the database to use.
+# - username - Username for plugmod to connect with, leave blank for no authentication.
+# - password - Password to use. Leave blank for no password.
+# =============
+DataStore:
+ type: sqlite
+ database: minecraft
+ remote:
+  host: 127.0.0.1
+  port: 3306
+  username: ilike
+  password: turtles
+Config-Version: 0.1
