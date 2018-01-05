@@ -1,7 +1,9 @@
 package plugmod.config.simple;
 
 import java.io.File;
-import java.net.URISyntaxException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.logging.Level;
 
 import org.bukkit.Bukkit;
@@ -24,7 +26,7 @@ import plugmod.util.java.FileUtils;
  */
 public class SimpleConfig extends ConfigHandler {
 	
-	private File defaultsFile;
+	private URL defaultsFile;
 	
 	/**
 	 * Constructs a new SimpleConfig handler.
@@ -42,11 +44,7 @@ public class SimpleConfig extends ConfigHandler {
 	 */
 	public SimpleConfig(PlugMod plugmod, String defaultConfig) {
 		super(new YamlConfiguration(), new File(PlugModPlugin.getInstance().getDataFolder(), plugmod.getName() + ".yml"));
-		try {
-			defaultsFile = new File(plugmod.getClass().getClassLoader().getResource(defaultConfig).toURI());
-		} catch (URISyntaxException e) {
-			Bukkit.getLogger().log(Level.SEVERE, "Error defining defaults file: " + defaultConfig + " - malformed URI!", e);
-		}
+		defaultsFile = plugmod.getClass().getClassLoader().getResource(defaultConfig);
 	}
 
 	/**
@@ -54,7 +52,15 @@ public class SimpleConfig extends ConfigHandler {
 	 */
 	@Override
 	public void init() {
-		setDefaultConfig(YamlConfiguration.loadConfiguration(defaultsFile));
+		if (defaultsFile != null) {
+            try {
+				setDefaultConfig(YamlConfiguration.loadConfiguration(
+						new InputStreamReader(FileUtils.getFileInput(defaultsFile))
+				));
+			} catch (IOException e) {
+				Bukkit.getLogger().log(Level.SEVERE, "IO Error reading default config!", e);
+			}
+		}
 	}
 	
 	/**

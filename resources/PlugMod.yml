@@ -22,6 +22,6 @@ DataStore:
  remote:
   host: 127.0.0.1
   port: 3306
-  username: ilike
+  username: ilike #MEEEP MEEP MEEP
   password: turtles
 Config-Version: 0.1

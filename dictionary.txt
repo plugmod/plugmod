@@ -6,3 +6,9 @@ yaml
 plugmods
 datafolder
 plugin
+malformatted
+sqlite
+inputstream
+outputstream
+url
+yml

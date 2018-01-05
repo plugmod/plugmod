@@ -36,11 +36,11 @@ public class PlugModPlugin extends PlugMod {
 		plugmodConfig.setup();
 		config = plugmodConfig.getConfig();
 		DataPlace.getInstance().init(new DBConfig(
-				DBType.valueOf(config.getString("DataStore.type").toUpperCase()),
+				DBType.fromString(config.getString("DataStore.type")),
 				config.getString("DataStore.database"),
 				new DBRemoteConfig(
 						config.getString("DataStore.host"),
-						config.getInt("DataStore.port"),
+						config.   getInt("DataStore.port"),
 						config.getString("DataStore.username"),
 						config.getString("DataStore.password")
 				)
